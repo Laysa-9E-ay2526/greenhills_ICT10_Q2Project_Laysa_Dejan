@@ -1,0 +1,304 @@
+/* ==========================================================================
+   ICT 10 showcase - Production-Grade Custom Stylesheet
+   Architecture: Utility-First Modular Tokens & Micro-Interactions
+   Author: Lead Frontend Architect
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. DESIGN TOKENS & SYSTEM VARIABLES
+   -------------------------------------------------------------------------- */
+:root {
+  /* Color Palette */
+  --brand-primary: #3b82f6;
+  --brand-primary-hover: #2563eb;
+  --brand-accent: #6366f1;
+  --brand-gradient: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  --brand-glow: rgba(59, 130, 246, 0.25);
+  
+  /* Neutral Palette */
+  --bg-surface: #0f172a;
+  --bg-mesh-1: rgba(59, 130, 246, 0.08);
+  --bg-mesh-2: rgba(99, 102, 241, 0.08);
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --card-border: rgba(226, 232, 240, 0.8);
+  
+  /* Text Colors */
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-inverse: #ffffff;
+  
+  /* Elevation & Shadows */
+  --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 8px 16px -4px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
+  --shadow-glow: 0 0 20px var(--brand-glow);
+
+  /* Geometry & Timing */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. GLOBAL BODY & BACKGROUND ENGINE
+   -------------------------------------------------------------------------- */
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #f8fafc;
+  background-image: 
+    radial-gradient(at 0% 0%, var(--bg-mesh-1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, var(--bg-mesh-2) 0px, transparent 50%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------------------------------------------------
+   3. GLASSMORPHIC NAVIGATION BAR
+   -------------------------------------------------------------------------- */
+.navbar {
+  background: rgba(15, 23, 42, 0.85) !important;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.85rem 0;
+  transition: var(--transition-smooth);
+}
+
+.navbar-brand {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-link {
+  font-weight: 600;
+  font-size: 0.925rem;
+  color: #94a3b8 !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-link.active {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.12);
+  font-weight: 700;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 2px;
+  background: var(--brand-primary);
+  border-radius: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   4. MAIN ELEVATED CONTAINER CARDS
+   -------------------------------------------------------------------------- */
+.main-container {
+  max-width: 760px;
+  margin: 3.5rem auto;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 2.75rem 3rem;
+  box-shadow: var(--shadow-xl);
+  backdrop-filter: blur(10px);
+  animation: containerFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes containerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+h1 {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #0f172a;
+}
+
+h3, h4 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* --------------------------------------------------------------------------
+   5. FORM INPUTS & INTERACTIVE CONTROLS
+   -------------------------------------------------------------------------- */
+.form-control,
+input[type="text"] {
+  background-color: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.15rem;
+  font-size: 0.975rem;
+  font-weight: 500;
+  color: var(--text-main);
+  transition: var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-control:focus,
+input[type="text"]:focus {
+  background-color: #ffffff;
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 4px var(--brand-glow);
+  outline: none;
+}
+
+.form-control::placeholder,
+input[type="text"]::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+/* --------------------------------------------------------------------------
+   6. BUTTONS & MICRO-INTERACTIONS
+   -------------------------------------------------------------------------- */
+.btn-primary,
+.btn-custom,
+button,
+input[type="button"] {
+  background: var(--brand-gradient);
+  color: var(--text-inverse);
+  font-weight: 700;
+  font-size: 0.975rem;
+  letter-spacing: 0.01em;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 0.875rem 1.75rem;
+  box-shadow: var(--shadow-md), 0 0 0 0 var(--brand-glow);
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.btn-primary:hover,
+.btn-custom:hover,
+button:hover,
+input[type="button"]:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl), var(--shadow-glow);
+  filter: brightness(1.05);
+}
+
+.btn-primary:active,
+.btn-custom:active,
+button:active,
+input[type="button"]:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --------------------------------------------------------------------------
+   7. DYNAMIC RESULT CALLOUT BOXES
+   -------------------------------------------------------------------------- */
+.result-box,
+#result,
+#output,
+#creator-output {
+  margin-top: 1.75rem;
+  padding: 1.35rem 1.6rem;
+  border-radius: var(--radius-md);
+  background: #f0f7ff;
+  border: 1px solid #dbeafe;
+  border-left: 5px solid var(--brand-primary);
+  color: #1e3a8a;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.6;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+  animation: resultSlideIn 0.35s ease-out;
+}
+
+@keyframes resultSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. CREATOR CARDS & BADGES ENGINE
+   -------------------------------------------------------------------------- */
+.card {
+  border-radius: var(--radius-md) !important;
+  border: 1px solid var(--card-border) !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md) !important;
+  border-color: #cbd5e1 !important;
+}
+
+.badge {
+  padding: 0.5em 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border-radius: 30px;
+}
+
+/* --------------------------------------------------------------------------
+   9. FOOTER
+   -------------------------------------------------------------------------- */
+footer {
+  margin-top: auto;
+  background: #0f172a;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #64748b;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 1.25rem 0;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   10. RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .main-container {
+    margin: 1.5rem 1rem;
+    padding: 1.75rem 1.5rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+}
